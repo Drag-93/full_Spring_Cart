@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니 목록</title>
+    <link rel="stylesheet" th:href="@{/css/cartList1.css}">
+</head>
+<body>
+<h1>장바구니목록</h1>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>itemSize</th>
+        <th>memberId</th>
+        <th>상품(ID)</th>
+        <th>itemTitle</th>
+        <th>itemDetail</th>
+        <th>itemPrice</th>
+        <th>createTime</th>
+        <th>updateTime</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item: ${itemList}">
+
+        <td th:text="${item.id}"></td>
+
+        <td th:text="${item.itemSize}"></td>
+
+<!--        <td th:text="${memberId}"></td>-->
+        <td th:text="${item.cartEntity.memberEntity.id}"></td>
+        <td th:text="${item.itemEntity.id}"></td>
+        <td th:text="${item.itemEntity.itemTitle}"></td>
+        <td th:text="${item.itemEntity.itemDetail}"></td>
+        <td th:text="${item.itemEntity.itemPrice}"></td>
+        <td th:text="${item.createTime}"></td>
+        <td th:text="${item.updateTime}"></td>
+        <td><a th:href="@{/cart/delete/{memberId}/{itemListId}(memberId=${memberId},itemListId=${item.id})}">삭제</a></td>
+
+    </tr>
+    <tr>
+        <td colspan="9">
+            <a th:href="@{/item}">상품(상품리스트)</a>
+            <a th:href="@{/payment/{id}(id=${itemList.get(0).cartEntity.memberEntity.id})}">결제</a>
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+</body>
+</html>

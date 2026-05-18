@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.itemList{
+    width: 100%;
+    padding: 50px 20px;
+}
+
+.itemList .itemList-con{
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.itemList .itemList-con h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+.itemList .itemList-con table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.itemList .itemList-con table thead{
+    background-color: #222;
+    color: #fff;
+}
+
+.itemList .itemList-con table thead tr th{
+    padding: 15px 10px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+}
+
+.itemList .itemList-con table tbody tr{
+    transition: 0.2s;
+}
+
+.itemList .itemList-con table tbody tr:nth-child(even){
+    background-color: #f8f9fb;
+}
+
+.itemList .itemList-con table tbody tr:hover{
+    background-color: #eef3ff;
+}
+
+.itemList .itemList-con table tbody tr td{
+    text-align: center;
+    padding: 14px 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.itemList .itemList-con table tbody tr td a{
+    color: #3b82f6;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.itemList .itemList-con table tbody tr td a:hover{
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px){
+
+    .itemList .itemList-con{
+        padding: 20px;
+        overflow-x: auto;
+    }
+
+    .itemList .itemList-con h1{
+        font-size: 24px;
+    }
+
+    .itemList .itemList-con table{
+        min-width: 700px;
+    }
+}

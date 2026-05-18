@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <script src="/js/detail.js" defer></script>
+    <link rel="stylesheet" th:href="@{/css/itemDetail.css}">
+</head>
+<body>
+<div class="detail">
+    <div class="detail-con">
+        <h1 th:text="${item.itemTitle}"></h1>
+        <form th:action="@{/cart/insert/addCart0}" method="post">
+            <ul>
+                <li>
+                    <label for="id">ID</label>
+                    <input type="text" name="id" id="id" th:value="${item.id}">
+                </li>
+                <li>
+                    <label for="itemTitle">itemTitle</label>
+                    <input type="text" name="itemTitle" id="itemTitle" th:value="${item.itemTitle}">
+                </li>
+                <li>
+                    <label for="itemDetail">itemDetail</label>
+                    <input type="text" name="itemDetail" id="itemDetail" th:value="${item.itemDetail}">
+                </li>
+                <li>
+                    <label for="itemPrice">itemPrice</label>
+                    <input type="text" name="itemPrice" id="itemPrice" th:value="${item.itemPrice}">
+                </li>
+                <li>
+                    <label for="memberId">memberId</label>
+                    <input type="text" name="memberId" id="memberId" th:value="${item.memberId}">
+                </li>
+                <li>
+                    <label for="itemSize">itemSize</label>
+                    <input type="number" name="itemSize" id="itemSize" th:value="${item.itemSize}">
+                </li>
+                <li>
+                    <span>total: </span>
+                    <span id="total"></span>
+                </li>
+                <li th:text="${item.createTime}"></li>
+                <li th:text="${item.updateTime}"></li>
+                <li>
+                    <input type="submit" value="장바구니0">
+                    <button type="button" onclick="cartFn(event)">장바구니1(JS)</button>
+                    <a th:href="@{/cart/insert/memberId/{memberId}/id/{id}(memberId=${item.memberId},id=${item.id})}">장바구니2</a>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+</html>

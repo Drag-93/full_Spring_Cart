@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>itemList</title>
+    <link rel="stylesheet" th:href="@{/css/itemList.css}">
+</head>
+<body>
+<div class="itemList">
+    <div class="itemList-con">
+        <h1>상품목록</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>itemTitle</th>
+                <th>itemDetail</th>
+                <th>itemPrice</th>
+                <th>memberId</th>
+                <th>보기</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item: ${itemList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.itemTitle}"></td>
+                <td th:text="${item.itemDetail}"></td>
+                <td th:text="${item.itemPrice}"></td>
+                <td th:text="${item.memberId}"></td>
+                <td><a th:href="@{/item/detail/{id}(id=${item.id})}"><span th:text="${item.itemTitle}"></span></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
