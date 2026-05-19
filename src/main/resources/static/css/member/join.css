@@ -1,0 +1,84 @@
+@import url(../common/header.css);
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f5f6f8;
+    color: #333;
+}
+
+/* 회원가입 전체 영역 */
+.join{
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+/* 회원가입 박스 */
+.join .join-con{
+    width: 100%;
+    max-width: 420px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* 제목 */
+.join .join-con h1{
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 32px;
+    color: #222;
+}
+
+/* 리스트 */
+.join .join-con ul{
+    list-style: none;
+}
+
+.join .join-con ul li{
+    margin-bottom: 20px;
+}
+
+/* input 공통 */
+.join .join-con ul li input{
+    width: 100%;
+    height: 52px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* 포커스 */
+.join .join-con ul li input:focus{
+    border-color: #ff4d4f;
+    box-shadow: 0 0 0 3px rgba(255,77,79,0.15);
+}
+
+/* 버튼 */
+.join .join-con ul li input[type="submit"]{
+    background-color: #ff4d4f;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.join .join-con ul li input[type="submit"]:hover{
+    background-color: #e63b3d;
+}

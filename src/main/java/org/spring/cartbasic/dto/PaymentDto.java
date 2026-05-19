@@ -27,10 +27,9 @@ public class PaymentDto {
 
     private String orderMethod;
 
-
     private Long memberId;
 
-    private  Long cartId;
+    private Long cartId;
 
     private MemberEntity memberEntity;
 

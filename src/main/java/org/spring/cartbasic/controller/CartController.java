@@ -3,12 +3,16 @@ package org.spring.cartbasic.controller;
 import lombok.RequiredArgsConstructor;
 import org.spring.cartbasic.dto.ItemDto;
 import org.spring.cartbasic.dto.ItemListDto;
+import org.spring.cartbasic.entity.CartEntity;
+import org.spring.cartbasic.entity.ItemListEntity;
 import org.spring.cartbasic.service.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cart")
@@ -39,7 +43,9 @@ public class CartController {
     //4. 본인 장바구니 목록 조회 화면
     @GetMapping("/cartList1/{memberId}")
     public String cartList1(@PathVariable("memberId")Long memberId, Model model){
+
         List<ItemListDto>itemListDtos=cartService.cartList(memberId);
+
         model.addAttribute("itemList",itemListDtos);
         model.addAttribute("memberId",memberId);
         return "item/cartList1";

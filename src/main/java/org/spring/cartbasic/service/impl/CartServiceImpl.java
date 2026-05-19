@@ -15,7 +15,10 @@ import org.spring.cartbasic.service.CartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -87,7 +90,6 @@ public class CartServiceImpl implements CartService {
             existingItem.setItemSize(newSize);
             //따로 save()를 호출하지 않아도 트랜잭션이 끝나면서 자동으로 DB에 update쿼리가 나감
         }
-
     }
 
 
@@ -96,10 +98,12 @@ public class CartServiceImpl implements CartService {
     public List<ItemListDto> cartList(Long memberId) {
         MemberEntity memberEntity = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보가 없습니다."));
-        CartEntity cartEntity = cartRepository.findByMemberEntityId(memberEntity.getId())
-                .orElseThrow(() -> new IllegalArgumentException("장바구니가 비어있습니다."));
+        Optional<CartEntity> optionalCartEntity = cartRepository.findByMemberEntityId(memberEntity.getId());
+               if(optionalCartEntity.isEmpty()){
+              return new ArrayList<>();
+        }
 
-        List<ItemListEntity> itemListEntities = itemListRepository.findAllByCartEntityId(cartEntity.getId());
+        List<ItemListEntity> itemListEntities = itemListRepository.findAllByCartEntityId(optionalCartEntity.get().getId());
 
         return itemListEntities.stream().map(itemList ->
                 ItemListDto.builder()

@@ -32,9 +32,12 @@ public class PaymentServiceImpl implements PaymentService {
         }
         //3. 결제 마스터 정보(PaymentEntity)저장
         PaymentEntity paymentEntity = PaymentEntity.builder()
-                .paymentType(paymentDto.getPaymentType()).orderMethod(paymentDto.getOrderMethod())
-                .orderPost(paymentDto.getOrderPost()).payResult(paymentDto.getPayResult())
-                .orderAddr(paymentDto.getOrderAddr()).memberEntity(memberEntity)
+                .paymentType(paymentDto.getPaymentType())
+                .orderMethod(paymentDto.getOrderMethod())
+                .orderPost(paymentDto.getOrderPost())
+                .payResult(paymentDto.getPayResult())
+                .orderAddr(paymentDto.getOrderAddr())
+                .memberEntity(memberEntity)
                 .build();
         PaymentEntity savedPayment = paymentRepository.save(paymentEntity);
         //4. 장바구니 내역을 결제 상세 내역(PaymentItemEntity)스탭샷으로 변환
@@ -58,6 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
     public List<PaymentDto> paymentListFn(Long memberId) {
         List<PaymentEntity> paymentEntities= paymentRepository.findAllByMemberEntityId(memberId);
 
+        System.out.println(paymentEntities.toString());
         return paymentEntities.stream().map(el->PaymentDto.builder()
                 .paymentType(el.getPaymentType())
                 .orderAddr(el.getOrderAddr())

@@ -17,7 +17,7 @@ public class ItemListEntity extends BasicTime {
     @Column(name = "itemList_id")
     private Long id;
 
-    @Column(columnDefinition = "boolean default 0")
+    @Column(columnDefinition = "int default 0")
     private int itemSize;
 
     //N:1

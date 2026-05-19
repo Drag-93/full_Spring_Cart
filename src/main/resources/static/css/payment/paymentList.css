@@ -1,0 +1,128 @@
+@import url(../common/header.css);
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f6fa;
+    color: #222;
+    font-family: Arial, sans-serif;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.order {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.order-con {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.order-con > ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.order-con > ul > li {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+
+.order-con > ul > li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.top {
+    padding: 22px;
+    background: #222;
+    color: #fff;
+}
+
+.top ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top li {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.top li:first-child::before {
+    content: "회원ID: ";
+    font-weight: bold;
+}
+
+.top li:nth-child(2)::before {
+    content: "장바구니ID: ";
+    font-weight: bold;
+}
+
+.top span:first-child {
+    font-weight: bold;
+}
+
+.bottom {
+    padding: 20px;
+}
+
+.bottom ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bottom li {
+    display: grid;
+    grid-template-columns: 1fr 80px 50px;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.bottom li span:first-child {
+    font-weight: bold;
+}
+
+.bottom li span:nth-child(2)::after {
+    content: "원";
+}
+
+.bottom li span:nth-child(3)::before {
+    content: "수량 ";
+}
+
+@media screen and (max-width: 1200px) {
+    .order-con {
+        width: 94%;
+    }
+
+    .order-con > ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .order-con > ul {
+        grid-template-columns: 1fr;
+    }
+}

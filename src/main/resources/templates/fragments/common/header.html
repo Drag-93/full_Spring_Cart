@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">
+<div class="header" th:fragment="headerFragment">
+    <h1 class="logo">
+        <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="logo"></a>
+    </h1>
+    <div class="gnb">
+        <ul>
+            <li><a th:href="@{/}">HOME</a></li>
+            <li><a th:href="@{/item}">상품(상품리스트)</a></li>
+            <th:block sec:authorize="isAnonymous()"> <!--로그인 후 보이지 않게-->
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+                <li><a th:href="@{/member/login}">로그인</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()"> <!--로그인 후, 비로그인 시 안보이게-->
+                <th:block sec:authorize="hasRole('ADMIN')"><!--관리자권한-->
+                    <li><a th:href="@{/admin/payment}">결제목록(관리자)</a></li>
+                </th:block>
+
+                <li><span th:text="${#authentication.principal.memberEntity.userEmail}" style="color:#500"/>&
+                    <span th:text="${#authentication.principal.memberEntity.role}" style="color:#500"/>
+                </li>
+
+
+                <li><a th:href="@{/member/logout}">로그아웃</a></li>
+
+                <li ><a th:href="@{/payment/paymentList/{id}(id=${#authentication.principal.memberEntity.id})}">결제목록</a>
+                </li>
+                <!-- 로그인 한 회원의 장바구니 목록-->
+                <li><a th:href="@{/cart/cartList1/{id}(id=${#authentication.principal.memberEntity.id})}" class="cart-a">
+                <!-- 상품 종류 수 표시 -->
+                    <p>장바구니에 담긴 상품 종류<span th:text="${cartCount}">2</span> 종 </p>
+                    <!-- 총 상품 수량 합계 표시-->
+                    <img th:src="@{/images/logo.png}" >총 주문 수량 : <span  th:text="${itemListCount}" style="color:#f00">0</span>
+                </a></li>
+
+            </th:block>
+        </ul>
+    </div>
+</div>
+</html>

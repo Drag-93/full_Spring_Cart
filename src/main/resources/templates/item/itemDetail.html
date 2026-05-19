@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
     <script src="/js/detail.js" defer></script>
-    <link rel="stylesheet" th:href="@{/css/itemDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/itemDetail.css}">
 </head>
 <body>
+<div th:replace="~{fragments/common/header :: headerFragment}"></div>
 <div class="detail">
     <div class="detail-con">
         <h1 th:text="${item.itemTitle}"></h1>
@@ -30,7 +32,7 @@
                 </li>
                 <li>
                     <label for="memberId">memberId</label>
-                    <input type="text" name="memberId" id="memberId" th:value="${item.memberId}">
+                    <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}">
                 </li>
                 <li>
                     <label for="itemSize">itemSize</label>
@@ -43,9 +45,18 @@
                 <li th:text="${item.createTime}"></li>
                 <li th:text="${item.updateTime}"></li>
                 <li>
+                    <!--로그인 상태 : 모든 장바구니 담기 기능 활성화-->
+                    <th:block sec:authorize="isAuthenticated()">
                     <input type="submit" value="장바구니0">
                     <button type="button" onclick="cartFn(event)">장바구니1(JS)</button>
                     <a th:href="@{/cart/insert/memberId/{memberId}/id/{id}(memberId=${item.memberId},id=${item.id})}">장바구니2</a>
+                    </th:block>
+                    <!-- 비로그인 상태 시: 로그인 유도 문구 또는 로그인 페이지 이동 링크 제출-->
+                    <th:block sec:authorize="isAnonymous()">
+                    <div class="login-alert">
+                        장바구니 기능은 <a th:href="@{/member/login}">로그인</a> 후 이용 가능합니다.
+                    </div>
+                    </th:block>
                 </li>
             </ul>
         </form>

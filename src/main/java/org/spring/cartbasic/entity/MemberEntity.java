@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.spring.cartbasic.common.BasicTime;
 import org.spring.cartbasic.common.Role;
+import org.spring.cartbasic.dto.MemberDto;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -38,4 +40,25 @@ public class MemberEntity extends BasicTime {
     private List<PaymentEntity> paymentEntities;
 
 
+    // 회원가입
+    public static MemberEntity toInsertMemberEntity(MemberDto memberDto , PasswordEncoder passwordEncoder) {
+        MemberEntity memberEntity = new MemberEntity();
+
+        memberEntity.setUserEmail(memberDto.getUserEmail());
+        memberEntity.setUserPw(passwordEncoder.encode(memberDto.getUserPw()));
+        memberEntity.setRole(Role.MEMBER);
+
+        return memberEntity;
+    }
+    // 회원수정
+    public static MemberEntity toUpdateMemberEntity(MemberDto memberDto) {
+        MemberEntity memberEntity = new MemberEntity();
+
+        memberEntity.setId(memberDto.getId());
+        memberEntity.setUserEmail(memberDto.getUserEmail());
+        memberEntity.setUserPw(memberDto.getUserPw());
+        memberEntity.setRole(memberDto.getRole());
+
+        return memberEntity;
+    }
 }

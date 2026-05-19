@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>itemList</title>
-    <link rel="stylesheet" th:href="@{/css/itemList.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/itemList.css}">
 </head>
 <body>
+<div th:replace="~{fragments/common/header :: headerFragment}"></div>
 <div class="itemList">
     <div class="itemList-con">
         <h1>상품목록</h1>
@@ -16,7 +17,6 @@
                 <th>itemTitle</th>
                 <th>itemDetail</th>
                 <th>itemPrice</th>
-                <th>memberId</th>
                 <th>보기</th>
             </tr>
             </thead>
@@ -26,7 +26,6 @@
                 <td th:text="${item.itemTitle}"></td>
                 <td th:text="${item.itemDetail}"></td>
                 <td th:text="${item.itemPrice}"></td>
-                <td th:text="${item.memberId}"></td>
                 <td><a th:href="@{/item/detail/{id}(id=${item.id})}"><span th:text="${item.itemTitle}"></span></a></td>
             </tr>
             </tbody>

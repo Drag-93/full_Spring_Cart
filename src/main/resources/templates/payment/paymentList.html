@@ -3,77 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/payment/paymentList.css}">
 </head>
 <body>
-<h1>결제목록</h1>
-<table>
-    <thead>
-    <tr>
-    <th>id</th>
-    <th>itemSize</th>
-    <th>memberId</th>
-    <th>상품(id)</th>
-    <th>itemTitle</th>
-    <th>itemDetail</th>
-    <th>itemPrice</th>
-    <th>SUM</th>
-    <th>createTime</th>
-    <th>updateTime</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item: ${itemList}">
-        <td th:text="${item.id}" ></td>
-        <td th:text="${item.itemSize}" ></td>
-        <td th:text="${item.cartEntity.memberEntity.id}" ></td>
-        <td th:text="${item.itemEntity.id}" ></td>
-        <td th:text="${item.itemEntity.itemTitle}" ></td>
-        <td th:text="${item.itemEntity.itemDetail}" ></td>
-        <td th:text="${item.itemEntity.itemPrice}" ></td>
-        <td th:text="${item.itemEntity.itemPrice*item.itemSize}" ></td>
-        <td th:text="${item.createTime}" ></td>
-        <td th:text="${item.updateTime}" ></td>
-    </tr>
-    <tr>
-        <td colspan="10">
-            <span>결제방법</span>:
-            <select name="paymnetType" id="paymentType">
-                <option value="kakao" selected>kakao</option>
-                <option value="현금">현금</option>
-                <option value="결제">결제</option>
-            </select>||
-            <span>주문처</span>:
-            <select name="orderPost" id="orderPost">
-                <option value="상계동" selected>상계동</option>
-                <option value="중계동">중계동</option>
-                <option value="하계동">하계동</option>
-            </select>||
-            <span>주문방법</span>:
-            <select name="orderMethod" id="orderMethod">
-                <option value="배달" selected>배달</option>
-                <option value="택배">택배</option>
-                <option value="직접수령">직접수령</option>
-            </select>||
-            <span>배달주소</span>
-            <input type="text" name="orderAddr" id="orderAddr">||
-            <span>주문금액</span>:
-            <span id="payResult" th:text="${#aggregates.sum(itemList.![itemEntity.itemPrice*itemSize])}"></span>원
-            ||
-            <span>장바구니ID</span>:
-            <span id="cartId" th:text="${itemList.get(0).cartEntity.getId()}"></span>
-            ||
-            <span>회원ID</span>:
-            <span id="memberId" th:text="${itemList.get(0).cartEntity.memberEntity.id}"></span>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="10">
-            <a th:href="@{/item}">상품(상품리스트)</a>
-            <button onclick="paymentFn(event)">결제</button>
-        </td>
-    </tr>
-    </tbody>
-    <script th:src="@{/js/payment.js}"></script>
-</table>
+<div th:replace="~{fragments/common/header :: headerFragment}"></div>
+<div class="order">
+    <div class="order-con">
+
+        <th:block th:if="${paymentList == null or #lists.isEmpty(paymentList)}">
+            <div class="null">
+                <h1>주문내역이 없습니다.</h1>
+            </div>
+        </th:block>
+
+        <ul th:unless="${paymentList == null or #lists.isEmpty(paymentList)}">
+            <li th:each="payment : ${paymentList}">
+                <div class="top">
+                    <ul>
+                        <li th:text="${payment.memberId}"></li>
+                        <li><span>주문방법: </span><span th:text="${payment.paymentType}"></span></li>
+                        <li><span>주문처: </span><span th:text="${payment.orderPost}"></span></li>
+                        <li><span>배송주소: </span><span th:text="${payment.orderAddr}"></span></li>
+                        <li><span>수령방식: </span><span th:text="${payment.orderMethod}"></span></li>
+                        <li><span>주문금액: </span><span th:text="${payment.payResult}"></span></li>
+                    </ul>
+                </div>
+
+                <div class="bottom">
+                    <ul>
+                        <li th:each="paymentItem : ${payment.paymentItemEntities}">
+                            <span th:text="${paymentItem.paymentItemTitle}"></span>
+                            <span th:text="${paymentItem.paymentItemPrice}"></span>
+                            <span th:text="${paymentItem.paymentItemSize}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
 </body>
 </html>

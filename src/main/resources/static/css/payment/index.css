@@ -1,0 +1,113 @@
+@import url(../common/header.css);
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f6fa;
+    color: #222;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    width: 1200px;
+    margin: 50px auto 25px;
+    font-size: 32px;
+    color: #222;
+}
+
+table {
+    width: 1200px;
+    margin: 0 auto 60px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+thead {
+    background: #222;
+    color: #fff;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #f9f9f9;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td[colspan="10"] {
+    padding: 24px;
+    text-align: left;
+    line-height: 2.2;
+}
+
+select,
+input[type="text"] {
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    font-size: 14px;
+}
+
+select:focus,
+input[type="text"]:focus {
+    border-color: #222;
+}
+
+#orderAddr {
+    width: 220px;
+}
+
+#payResult,
+#cartId,
+#memberId {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #666;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+a:hover {
+    background: #444;
+}
+
+button {
+    padding: 10px 22px;
+    border: none;
+    background: #222;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #000;
+}

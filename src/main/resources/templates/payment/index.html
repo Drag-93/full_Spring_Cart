@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/payment/index.css}">
 </head>
 <body>
+<div th:replace="~{fragments/common/header :: headerFragment}"></div>
 <h1>결제목록</h1>
 <table>
     <thead>
@@ -37,7 +39,7 @@
     <tr>
         <td colspan="10">
             <span>결제방법</span>:
-            <select name="paymnetType" id="paymentType">
+            <select name="paymentType" id="paymentType">
                 <option value="kakao" selected>kakao</option>
                 <option value="현금">현금</option>
                 <option value="결제">결제</option>
