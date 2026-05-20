@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="left" th:fragment="leftFragment">
+    <div class="left-con">
+        <h1 onclick="location.href='/admin'">ADMIN</h1>
+    </div>
+    <ul>
+        <li><a th:href="@{/admin}">HOME</a></li>
+        <li><a th:href="@{/admin/member}">회원목록</a></li>
+        <li><a th:href="@{/admin/item}">상품목록</a></li>
+        <li><a th:href="@{/admin/payment}">결제목록</a></li>
+        <li><a th:href="@{/admin/orderPost}">주문처목록</a></li>
+        <li><a th:href="@{/admin/board}">공지목록</a></li>
+        <li><a th:href="@{/shop}">SHOP</a></li>
+    </ul>
+</div>
+</html>

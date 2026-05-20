@@ -8,4 +8,6 @@ public interface PaymentService {
     void insertPayment(PaymentDto paymentDto);
 
     List<PaymentDto> paymentListFn(Long memberId);
+
+    List<PaymentDto> paymentAllList();
 }

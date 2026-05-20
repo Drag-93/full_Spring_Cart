@@ -30,10 +30,17 @@
                     <label for="itemPrice">itemPrice</label>
                     <input type="text" name="itemPrice" id="itemPrice" th:value="${item.itemPrice}">
                 </li>
-                <li>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li>
                     <label for="memberId">memberId</label>
-                    <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}">
-                </li>
+                    <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}" readonly>
+                    </li>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <li>
+                    <input type="hidden" name="memberId"  th:value="1L" readonly>
+                    </li>
+                </th:block>
                 <li>
                     <label for="itemSize">itemSize</label>
                     <input type="number" name="itemSize" id="itemSize" th:value="${item.itemSize}">

@@ -9,27 +9,21 @@
 <div th:replace="~{fragments/common/header :: headerFragment}"></div>
 <div class="itemList">
     <div class="itemList-con">
-        <h1>상품목록</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>itemTitle</th>
-                <th>itemDetail</th>
-                <th>itemPrice</th>
-                <th>보기</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item: ${itemList}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.itemTitle}"></td>
-                <td th:text="${item.itemDetail}"></td>
-                <td th:text="${item.itemPrice}"></td>
-                <td><a th:href="@{/item/detail/{id}(id=${item.id})}"><span th:text="${item.itemTitle}"></span></a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="title">
+            <h1>상품목록</h1>
+        </div>
+
+            <div th:each="item: ${itemList}" class="grid">
+                <div class="top">
+                <span>상품명: </span><span th:text="${item.itemTitle}"></span><br>
+                <span th:text="${item.itemDetail}"></span>
+                </div>
+                <div class="bottom">
+                <span>가격: </span><span th:text="${item.itemPrice}"></span> <br>
+                <a  class="detail-btn" th:href="@{/item/detail/{id}(id=${item.id})}"><span th:text="${item.itemTitle}"></span></a>
+                </div>
+            </div>
+
     </div>
 </div>
 </body>

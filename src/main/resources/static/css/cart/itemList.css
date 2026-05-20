@@ -7,101 +7,129 @@
     box-sizing: border-box;
 }
 
-ul,li{
-    list-style: none;
-}
-
 a{
     text-decoration: none;
     color: inherit;
 }
 
 body{
-    background-color: #f4f6f9;
-    font-family: Arial, sans-serif;
-    color: #333;
-}
-
-.itemList{
-    width: 100%;
-    padding: 50px 20px;
-}
-
-.itemList .itemList-con{
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.itemList .itemList-con h1{
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 32px;
-    font-weight: 700;
+    background-color: #f5f6fa;
+    font-family: 'Pretendard', sans-serif;
     color: #222;
 }
 
-.itemList .itemList-con table{
+/* 전체 */
+.itemList{
     width: 100%;
-    border-collapse: collapse;
+    padding: 60px 20px;
 }
 
-.itemList .itemList-con table thead{
-    background-color: #222;
-    color: #fff;
+/* 컨텐츠 */
+.itemList .itemList-con{
+    max-width: 1280px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
 }
 
-.itemList .itemList-con table thead tr th{
-    padding: 15px 10px;
+/* 제목 */
+.itemList .itemList-con .title{
+    grid-column: 1 / -1;
+}
+
+.itemList .itemList-con .title h1{
+    font-size: 34px;
+    font-weight: 700;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #111827;
+    color: #111827;
+}
+
+/* 카드 */
+.itemList .itemList-con .grid{
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.itemList .itemList-con .grid:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* 상단 */
+.itemList .itemList-con .grid .top{
+    margin-bottom: 20px;
+}
+
+.itemList .itemList-con .grid .top span:first-child{
+    font-weight: 700;
+    color: #555;
     font-size: 15px;
-    border: 1px solid #ddd;
 }
 
-.itemList .itemList-con table tbody tr{
-    transition: 0.2s;
+.itemList .itemList-con .grid .top span:nth-child(2){
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
 }
 
-.itemList .itemList-con table tbody tr:nth-child(even){
-    background-color: #f8f9fb;
-}
-
-.itemList .itemList-con table tbody tr:hover{
-    background-color: #eef3ff;
-}
-
-.itemList .itemList-con table tbody tr td{
-    text-align: center;
-    padding: 14px 10px;
-    border: 1px solid #ddd;
+.itemList .itemList-con .grid .top span:last-child{
+    display: block;
+    margin-top: 12px;
+    line-height: 1.5;
+    color: #666;
     font-size: 14px;
 }
 
-.itemList .itemList-con table tbody tr td a{
-    color: #3b82f6;
+/* 하단 */
+.itemList .itemList-con .grid .bottom{
+    border-top: 1px solid #eee;
+    padding-top: 18px;
+}
+
+.itemList .itemList-con .grid .bottom span:first-child{
+    font-weight: 700;
+    color: #444;
+}
+
+.itemList .itemList-con .grid .bottom span:nth-child(2){
+    color: #ff4d4f;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 버튼 */
+.itemList .itemList-con .grid .bottom .detail-btn{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 15px;
+
+    background-color: #111827 !important;
+    color: #fff !important;
+
+    border-radius: 10px;
+    font-size: 15px;
     font-weight: 600;
-    transition: 0.2s;
+
+    transition: 0.3s;
 }
 
-.itemList .itemList-con table tbody tr td a:hover{
-    color: #1d4ed8;
-    text-decoration: underline;
+.itemList .itemList-con .grid .bottom .detail-btn:hover{
+    background-color: #374151 !important;
+    color: #fff !important;
 }
 
-@media screen and (max-width: 768px){
-
-    .itemList .itemList-con{
-        padding: 20px;
-        overflow-x: auto;
-    }
-
-    .itemList .itemList-con h1{
-        font-size: 24px;
-    }
-
-    .itemList .itemList-con table{
-        min-width: 700px;
-    }
+.itemList .itemList-con .grid .bottom .detail-btn span{
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
 }

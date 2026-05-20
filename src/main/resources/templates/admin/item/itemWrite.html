@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="admin">
+    <div class="admin-con">
+        <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
+        <div class="right">
+            <div class="top">
+                <h1 class="title">상품등록 페이지</h1>
+                <div class="admin-addItem">
+                    <div class="admin-addItem-con">
+                        <form th:action="@{/admin/item/write}" method="post">
+                            <ul>
+                                <li>
+                                    <label for="itemTitle">상품명</label>
+                                    <input type="text" name="itemTitle" id="itemTitle">
+                                </li>
+                                <li>
+                                    <label for="itemDetail">상세정보</label>
+                                    <input type="text" name="itemDetail" id="itemDetail">
+                                </li>
+                                <li>
+                                    <label for="itemPrice">가격</label>
+                                    <input type="text" name="itemPrice" id="itemPrice">
+                                </li>
+                                <li>
+                                    <label for="memberId">등록자 ID</label>
+                                    <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}" readonly>
+                                </li>
+                                <li>
+                                    <input type="submit" value="등록하기">
+                                    <input type="reset" value="초기화">
+                                </li>
+                            </ul>
+                        </form>
+                        <a th:href="@{/admin/item}">목록으로</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

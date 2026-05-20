@@ -21,11 +21,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         System.out.println(authentication.getPrincipal()+"Principal"); // 로그인 사용자
         System.out.println(authentication.getPrincipal().toString());
         System.out.println(authentication.getAuthorities()); // 사용자 권한
+        System.out.println(authentication.getDetails().toString());
 
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
 
-        out.println("<script>alert('"+authentication.getName()+"님 반갑습니다')");
+        out.println("<script> alert('"+authentication.getName()+"님 반갑습니다');"+" location.href='/';" + "</script>");
         out.close();
 
     }

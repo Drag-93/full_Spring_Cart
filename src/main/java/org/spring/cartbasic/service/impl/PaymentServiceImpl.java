@@ -72,4 +72,19 @@ public class PaymentServiceImpl implements PaymentService {
                 .paymentItemEntities(el.getPaymentItemEntities())
                 .build()).toList();
     }
+
+    @Override
+    public List<PaymentDto> paymentAllList() {
+
+        return  paymentRepository.findAll().stream().map(el->
+                PaymentDto.builder()
+                        .paymentType(el.getPaymentType())
+                        .orderAddr(el.getOrderAddr())
+                        .orderMethod(el.getOrderMethod())
+                        .orderPost(el.getOrderPost())
+                        .payResult(el.getPayResult())
+                        .memberId(el.getMemberEntity().getId())
+                        .paymentItemEntities(el.getPaymentItemEntities())
+                        .build()).toList();
+    }
 }

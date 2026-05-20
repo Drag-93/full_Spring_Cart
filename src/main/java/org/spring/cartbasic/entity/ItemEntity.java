@@ -3,6 +3,7 @@ package org.spring.cartbasic.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.spring.cartbasic.common.BasicTime;
+import org.spring.cartbasic.dto.ItemDto;
 
 import java.util.List;
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>itemDetail</title>
+</head>
+<body>
+<div class="admin">
+    <div class="admin-con">
+        <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
+        <div class="right">
+            <div class="admin-item-detail">
+                <div class="admin-item-detail-con">
+                    <h1>상품 상세 정보</h1>
+                    <ul class="info-list">
+                        <li>
+                            <span class="label">상품명</span>
+                            <span class="content" th:text="${item.itemTitle}"></span>
+                        </li>
+                        <li>
+                            <span class="label">상세정보</span>
+                            <span class="content" th:text="${item.itemDetail}"></span>
+                        </li>
+                        <li th:if="${item.createTime !=null }">
+                            <span class="label">등록일</span>
+                            <span class="content"
+                                  th:text="${#temporals.format(item.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </li>
+                        <li th:if="${item.updateTime !=null }">
+                            <span class="label">수정일</span>
+                            <span class="content"
+                                  th:text="${#temporals.format(item.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </li>
+                        <li th:unless="${item.updateTime !=null }">
+                            <span class="label">수정일</span>
+                            <span class="content">X</span>
+                        </li>
+                    </ul>
+                    <div class="btn-group">
+                        <a th:href="@{/admin/item}" class="btn-list">목록으로</a>
+                        <!--            <a th:href="@{/member/update/{id}(id=${member.id})}" class="btn-edit">수정페이지</a>-->
+                        <!--            <a th:href="@{/member/delete/{id}(id=${member.id})}" class="btn-edit">삭제페이지</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

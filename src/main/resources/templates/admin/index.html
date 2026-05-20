@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="admin">
+    <div class="admin-con">
+<div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
+        <div class="right">
+            <div class="header">
+                <a th:href="@{/}">HOME</a>
+                <a th:href="@{/item}">상품(상품리스트)</a>
+                <a th:href="@{/member/logout}">로그아웃</a>
+            </div>
+            <div class="admin-list">
+                <div class="title">PAYMENT</div>
+                <div class="dashboard">
+                    <div class="dashboard-con">
+                        <h1>ADMIN INDEX</h1>
+                        <h1>ADMIN Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

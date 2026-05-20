@@ -4,16 +4,21 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.spring.cartbasic.dto.ItemDto;
 import org.spring.cartbasic.entity.ItemEntity;
+import org.spring.cartbasic.entity.MemberEntity;
 import org.spring.cartbasic.repository.ItemRepository;
+import org.spring.cartbasic.repository.MemberRepository;
 import org.spring.cartbasic.service.ItemService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
     @Override
     public List<ItemDto> itemListFn() {
     //기존의 findAll() 대신 N+1 문제를 방지하는 findAllWithMember()사용
@@ -49,5 +54,21 @@ public class ItemServiceImpl implements ItemService {
                 .updateTime(itemEntity.getUpdateTime())
                 .build();
     }
-   }
+
+    @Override
+    public void itemInsert(ItemDto itemDto) {
+        memberRepository.findById(itemDto.getMemberId()).orElseThrow(()->{
+            throw new IllegalArgumentException("회원정보가 없습니다.");
+        });
+
+        //파일(이미지 없을때)
+        ItemEntity itemEntity = ItemEntity.builder()
+                .itemTitle(itemDto.getItemTitle())
+                .itemDetail(itemDto.getItemDetail())
+                .itemPrice(itemDto.getItemPrice())
+                .memberEntity(MemberEntity.builder().id(itemDto.getMemberId()).build())
+                .build();
+        itemRepository.save(itemEntity);
+    }
+}
 

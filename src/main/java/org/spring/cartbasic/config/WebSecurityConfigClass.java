@@ -37,9 +37,10 @@ public class WebSecurityConfigClass {
                                 .usernameParameter("userEmail")//로그인 아이디
                                 .passwordParameter("userPw")//로그인 비밀번호
                                 .loginProcessingUrl("/member/login")//form action -> POST, form 로그인 url
-                                .defaultSuccessUrl("/")//로그인 설정시
+                                .successHandler(customAuthenticationSuccessHandler())
 //                        .failureUrl("/member/lgoinFail") //로그인 실패시
-                                .failureUrl("/member/login?error=true") //로그인 실패시 -> 다시 로그인 페이지로
+                                .failureHandler(customAuthenticationFailureHandler())
+//                                .failureUrl("/member/login?error=true") //로그인 실패시 -> 다시 로그인 페이지로
                                 .permitAll()
         );
 
