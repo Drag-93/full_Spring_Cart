@@ -1,0 +1,46 @@
+.adminHeader{
+    width: 100%;
+    height: 70px;
+    background-color: #0f172a;
+}
+
+.adminHeader .header{
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+}
+
+.adminHeader .header a{
+    min-width: 110px;
+    height: 42px;
+    padding: 0 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    background-color: #1e293b;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.adminHeader .header a:hover{
+    background-color: #2563eb;
+}
+
+.adminHeader .header a:last-child{
+    background-color: #ef4444;
+}
+
+.adminHeader .header a:last-child:hover{
+    background-color: #dc2626;
+}

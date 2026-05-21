@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/member/memberDetail.css}">
 </head>
 <body>
 <div class="admin">
     <div class="admin-con">
         <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
+        <div class="admin-main">
+            <div th:replace="~{fragments/admin/adminHeader::adminHeaderFragment}"></div>
         <div class="right">
             <div class="admin-member-detail">
                 <div class="admin-member-detail-con">
@@ -45,6 +48,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

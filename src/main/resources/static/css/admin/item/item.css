@@ -1,0 +1,290 @@
+@import URL(../adminLeft.css);
+@import URL(../adminHeader.css);
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* 전체 레이아웃 */
+.admin{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.admin-con{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* left */
+.left{
+    width: 260px;
+    min-height: 100vh;
+    flex-shrink: 0;
+    background-color: #111827;
+    color: white;
+    padding: 30px 20px;
+}
+
+.left-con{
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.left-con h1{
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #f9fafb;
+}
+
+.left-con h1:hover{
+    color: #60a5fa;
+}
+
+.left ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left ul li a{
+    display: block;
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 8px;
+    color: #d1d5db;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.left ul li a:hover{
+    background-color: #1f2937;
+    color: white;
+    padding-left: 24px;
+}
+
+/* 오른쪽 전체 */
+.admin-main{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f4f6;
+}
+
+/* header */
+.adminHeader{
+    width: 100%;
+    height: 70px;
+    background-color: #0f172a;
+}
+
+.adminHeader .header{
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+}
+
+.adminHeader .header a{
+    min-width: 110px;
+    height: 42px;
+    padding: 0 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    background-color: #1e293b;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.adminHeader .header a:hover{
+    background-color: #2563eb;
+}
+
+.adminHeader .header a:last-child{
+    background-color: #ef4444;
+}
+
+.adminHeader .header a:last-child:hover{
+    background-color: #dc2626;
+}
+
+/* 본문 */
+.right{
+    flex: 1;
+    padding: 40px;
+}
+
+.top{
+    width: 100%;
+    background-color: white;
+    border-radius: 14px;
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.title{
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+/* 상품등록 버튼 */
+.btn-write{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 42px;
+    padding: 0 22px;
+    margin-bottom: 24px;
+
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.btn-write:hover{
+    background-color: #1d4ed8;
+}
+
+/* 검색 */
+.search{
+    margin-bottom: 30px;
+}
+
+.search form{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search select,
+.search input[type="text"]{
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search input[type="text"]{
+    width: 280px;
+}
+
+.search input[type="submit"]{
+    height: 42px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search input[type="submit"]:hover{
+    background-color: #1d4ed8;
+}
+
+/* 상품 테이블 */
+.admin-item{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-item-con table{
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+.admin-item-con thead{
+    background-color: #0f172a;
+    color: white;
+}
+
+.admin-item-con th,
+.admin-item-con td{
+    padding: 17px 14px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.admin-item-con tbody tr:hover{
+    background-color: #f9fafb;
+}
+
+/* 상품 상세정보 말줄임 */
+.admin-item-con td:nth-child(3){
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 가격 */
+.admin-item-con td:nth-child(4){
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* 상세보기 버튼 */
+.btn-detail{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 34px;
+
+    border-radius: 6px;
+    background-color: #10b981;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.btn-detail:hover{
+    background-color: #059669;
+}

@@ -1,0 +1,48 @@
+.left{
+    width: 260px;
+    min-height: 100vh;
+    flex-shrink: 0;
+    background-color: #111827;
+    color: white;
+    padding: 30px 20px;
+}
+
+.left-con{
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.left-con h1{
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #f9fafb;
+}
+
+.left-con h1:hover{
+    color: #60a5fa;
+}
+
+.left ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left ul li a{
+    display: block;
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 8px;
+    color: #d1d5db;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.left ul li a:hover{
+    background-color: #1f2937;
+    color: white;
+    padding-left: 24px;
+}

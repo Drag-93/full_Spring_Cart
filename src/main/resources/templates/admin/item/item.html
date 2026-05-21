@@ -3,60 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>item</title>
+    <link rel="stylesheet" th:href="@{/css/admin/item/item.css}">
 </head>
 <body>
 <div class="admin">
     <div class="admin-con">
         <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
-        <div class="right">
-            <div class="top">
-                <h1 class="title">상품목록페이지</h1>
-                <a th:href="@{/admin/item/write}">상품등록</a>
-                <!-- 검색 폼 -->
-                <div class="search">
-                    <form th:action="@{/admin/item}" method="get">
-                        <select name="subject">
-                            <option value="">::선택::</option>
-                            <option value="itemTitle"
-                                    th:selected="${param.subject != null and param.subject[0] == 'itemTitle'}">
-                                상품명
-                            </option>
-                        </select>
-                        <input type="text" name="search" th:value="${param.search}" placeholder="검색어를 입력하세요">
-                        <input type="submit" value="검색">
-                    </form>
-                </div>
-                <div class="admin-item">
-                    <div class="admin-item-con">
+        <div class="admin-main">
+            <div th:replace="~{fragments/admin/adminHeader::adminHeaderFragment}"></div>
+            <div class="right">
+                <div class="top">
+                    <h1 class="title">상품목록페이지</h1>
+                    <a th:href="@{/admin/item/write}" class="btn-write">상품등록</a>
+                    <!-- 검색 폼 -->
+                    <div class="search">
+                        <form th:action="@{/admin/item}" method="get">
+                            <select name="subject">
+                                <option value="">::선택::</option>
+                                <option value="itemTitle"
+                                        th:selected="${param.subject != null and param.subject[0] == 'itemTitle'}">
+                                    상품명
+                                </option>
+                            </select>
+                            <input type="text" name="search" th:value="${param.search}" placeholder="검색어를 입력하세요">
+                            <input type="submit" value="검색">
+                        </form>
+                    </div>
+                    <div class="admin-item">
+                        <div class="admin-item-con">
 
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>상품명</th>
-                                <th>상세정보</th>
-                                <th>가격</th>
-                                <!--                    <th>구매 품목</th>-->
-                                <th>createTime</th>
-                                <th>updateTime</th>
-                                <th>상세보기</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="item : ${itemList}">
-                                <td th:text="${item.id}"></td>
-                                <td th:text="${item.itemTitle}"></td>
-                                <td th:text="${item.itemDetail}"></td>
-                                <td th:text="${item.itemPrice}"></td>
-                                <!--                    <td ><span th:text="${member.itemEntities.id}">건</span></td>-->
-                                <td th:text="${item.createTime}"></td>
-                                <td th:text="${item.updateTime}"></td>
-                                <td><a th:href="@{/admin/item/detail/{id}(id=${item.id})}" class="btn-detail">보기</a>
-                                </td>
-                            </tr>
-                            </tbody>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>상품명</th>
+                                    <th>상세정보</th>
+                                    <th>가격</th>
+                                    <!--                    <th>구매 품목</th>-->
+                                    <th>createTime</th>
+                                    <th>updateTime</th>
+                                    <th>상세보기</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item : ${itemList}">
+                                    <td th:text="${item.id}"></td>
+                                    <td th:text="${item.itemTitle}"></td>
+                                    <td th:text="${item.itemDetail}"></td>
+                                    <td th:text="${item.itemPrice}"></td>
+                                    <!--                    <td ><span th:text="${member.itemEntities.id}">건</span></td>-->
+                                    <td th:text="${#temporals.format(item.createTime,'yyyy-MM-dd HH:mm')}"></td>
+                                    <td th:text="${#temporals.format(item.updateTime,'yyyy-MM-dd HH:mm')}"></td>
+                                    <td><a th:href="@{/admin/item/detail/{id}(id=${item.id})}" class="btn-detail">보기</a>
+                                    </td>
+                                </tr>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

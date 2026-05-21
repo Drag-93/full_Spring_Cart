@@ -3,59 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/member/member.css}">
 </head>
 <body>
 <div class="admin">
     <div class="admin-con">
         <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
-        <div class="right">
-            <div class="top">
-                <h1 class="title">회원목록페이지</h1>
+        <div class="admin-main">
+            <div th:replace="~{fragments/admin/adminHeader::adminHeaderFragment}"></div>
+            <div class="right">
+                <div class="top">
+                    <h1 class="title">회원목록페이지</h1>
 
-                <!-- 검색 폼 -->
-                <div class="search">
-                    <form th:action="@{/admin/member}" method="get">
-                        <select name="subject">
-                            <option value="">::선택::</option>
-                            <option value="userEmail"
-                                    th:selected="${param.subject != null and param.subject[0] == 'userEmail'}">
-                                이메일
-                            </option>
-                        </select>
-                        <input type="text" name="search" th:value="${param.search}" placeholder="검색어를 입력하세요">
-                        <input type="submit" value="검색">
-                    </form>
-                </div>
-                <div class="admin-member">
-                    <div class="admin-member-con">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>이메일</th>
-                                <th>비밀번호</th>
-                                <th>권한</th>
-                                <!--                    <th>구매 품목</th>-->
-                                <th>createTime</th>
-                                <th>updateTime</th>
-                                <th>상세보기</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="member : ${memberList}">
-                                <td th:text="${member.id}"></td>
-                                <td th:text="${member.userEmail}"></td>
-                                <td th:text="${member.userPw}"></td>
-                                <td th:text="${member.role}"></td>
-                                <!--                    <td ><span th:text="${member.itemEntities.id}">건</span></td>-->
-                                <td th:text="${member.createTime}"></td>
-                                <td th:text="${member.updateTime}"></td>
-                                <td><a th:href="@{/admin/member/detail/{id}(id=${member.id})}" class="btn-detail">보기</a>
-                                </td>
-                            </tr>
-                            </tbody>
+                    <!-- 검색 폼 -->
+                    <div class="search">
+                        <form th:action="@{/admin/member}" method="get">
+                            <select name="subject">
+                                <option value="">::선택::</option>
+                                <option value="userEmail"
+                                        th:selected="${param.subject != null and param.subject[0] == 'userEmail'}">
+                                    이메일
+                                </option>
+                            </select>
+                            <input type="text" name="search" th:value="${param.search}" placeholder="검색어를 입력하세요">
+                            <input type="submit" value="검색">
+                        </form>
+                    </div>
+                    <div class="admin-member">
+                        <div class="admin-member-con">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>이메일</th>
+                                    <!--                                <th>비밀번호</th>-->
+                                    <th>권한</th>
+                                    <th>등록상품</th>
+                                    <th>createTime</th>
+                                    <th>updateTime</th>
+                                    <th>상세보기</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="member : ${memberList}">
+                                    <td th:text="${member.id}"></td>
+                                    <td th:text="${member.userEmail}"></td>
+                                    <!--                                <td th:text="${member.userPw}"></td>-->
+                                    <td th:text="${member.role}"></td>
+                                    <td><span th:text="${member.itemEntities.size}"></span></td>
+                                    <td th:text="${#temporals.format(member.createTime,'yyyy-MM-dd HH:mm')}"></td>
+                                    <td th:text="${#temporals.format(member.updateTime,'yyyy-MM-dd HH:mm')}"></td>
+                                    <td><a th:href="@{/admin/member/detail/{id}(id=${member.id})}"
+                                           class="btn-detail">보기</a>
+                                    </td>
+                                </tr>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

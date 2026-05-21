@@ -1,0 +1,162 @@
+@import URL(../adminLeft.css);
+@import URL(../adminHeader.css);
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* 전체 레이아웃 */
+.admin{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.admin-con{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* 오른쪽 전체: header + content */
+.admin-main{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f4f6;
+}
+
+/* 본문 */
+.right{
+    flex: 1;
+    padding: 40px;
+}
+
+.top{
+    width: 100%;
+    background-color: white;
+    border-radius: 14px;
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* 제목 */
+.title{
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+/* 검색 */
+.search{
+    margin-bottom: 30px;
+}
+
+.search form{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search select,
+.search input[type="text"]{
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search input[type="text"]{
+    width: 280px;
+}
+
+.search input[type="submit"]{
+    height: 42px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search input[type="submit"]:hover{
+    background-color: #1d4ed8;
+}
+
+/* 테이블 */
+.admin-member{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-member-con table{
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+.admin-member-con thead{
+    background-color: #0f172a;
+    color: white;
+}
+
+.admin-member-con th,
+.admin-member-con td{
+    padding: 17px 14px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.admin-member-con tbody tr:hover{
+    background-color: #f9fafb;
+}
+
+.admin-member-con td span{
+    color: #2563eb;
+    font-weight: 700;
+}
+
+/* 상세보기 버튼 */
+.btn-detail{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 34px;
+
+    border-radius: 6px;
+    background-color: #10b981;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.btn-detail:hover{
+    background-color: #059669;
+}

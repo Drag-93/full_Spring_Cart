@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/item/itemWrite.css}">
 </head>
 <body>
 <div class="admin">
     <div class="admin-con">
         <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
+        <div class="admin-main">
+            <div th:replace="~{fragments/admin/adminHeader::adminHeaderFragment}"></div>
         <div class="right">
             <div class="top">
                 <h1 class="title">상품등록 페이지</h1>
@@ -44,6 +47,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
