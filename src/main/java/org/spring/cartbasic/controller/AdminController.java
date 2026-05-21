@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,7 @@ public class AdminController {
     @GetMapping("/item/detail/{id}")
     public String itemDetail(@PathVariable Long id, Model model){
         ItemDto itemDto = itemService.itemDetailFn(id);
+        System.out.println(itemDto.toString());
         model.addAttribute("item", itemDto);
         return "admin/item/itemDetail";
     }
@@ -63,7 +65,7 @@ public class AdminController {
         return "admin/item/itemWrite";
     }
     @PostMapping("/item/write")
-    public String itemWriteOk(@Valid ItemDto itemDto){
+    public String itemWriteOk(@Valid ItemDto itemDto) throws IOException {
         itemService.itemInsert(itemDto);
         return "redirect:/admin/item";
     }

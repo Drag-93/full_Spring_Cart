@@ -29,6 +29,15 @@ public class ItemEntity extends BasicTime {
     @Column(nullable = false)
     private int itemPrice;
 
+
+    //파일 유무 체크
+    @Column(nullable = true, columnDefinition = "int default 0")
+    private int attachFile;
+
+    //1:N
+    @OneToMany(mappedBy = "itemEntity", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<FileEntity> fileEntities;
+
     //hit 생략
 
     //N:1
@@ -39,23 +48,6 @@ public class ItemEntity extends BasicTime {
     //1:N
     @OneToMany(mappedBy = "itemEntity",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<ItemListEntity> itemListEntities;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

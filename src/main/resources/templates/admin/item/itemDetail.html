@@ -15,6 +15,7 @@
                 <div class="admin-item-detail">
                     <div class="admin-item-detail-con">
                         <h1>상품 상세 정보</h1>
+                        <div class="detail-wrap">
                         <ul class="info-list">
                             <li>
                                 <span class="label">상품명</span>
@@ -39,12 +40,21 @@
                                 <span class="content">X</span>
                             </li>
                         </ul>
+                        <div class="fileImage">
+                                <th:block th:if="${item.attachFile==1}">
+                                    <img th:src="@{|/upload/${item.newFileName}|}" alt="업로드이미지" style="height: 400px; width: 400px;">
+                                </th:block>
+                                <th:block th:unless="${item.attachFile==1}">
+                                    <img src="https://placehold.co/400x500?text=NOIMAGE" alt="이미지대체문구">
+                                </th:block>
+                            </div>
+                    </div>
+                    </div>
                         <div class="btn-group">
                             <a th:href="@{/admin/item}" class="btn-list">목록으로</a>
                             <!--            <a th:href="@{/member/update/{id}(id=${member.id})}" class="btn-edit">수정페이지</a>-->
                             <!--            <a th:href="@{/member/delete/{id}(id=${member.id})}" class="btn-edit">삭제페이지</a>-->
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

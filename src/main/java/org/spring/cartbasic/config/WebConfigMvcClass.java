@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfigMvcClass implements WebMvcConfigurer {
 
 
-    String saveFiles="file:///E:/full/upload/test0508/"; //실제 파일이 저장되는 경로
+    String saveFiles="file:///E:/full/upload/test0521/"; //실제 파일이 저장되는 경로
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -2,16 +2,23 @@ package org.spring.cartbasic.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.spring.cartbasic.dto.FileDto;
 import org.spring.cartbasic.dto.ItemDto;
+import org.spring.cartbasic.entity.FileEntity;
 import org.spring.cartbasic.entity.ItemEntity;
 import org.spring.cartbasic.entity.MemberEntity;
+import org.spring.cartbasic.repository.FileRepository;
 import org.spring.cartbasic.repository.ItemRepository;
 import org.spring.cartbasic.repository.MemberRepository;
 import org.spring.cartbasic.service.ItemService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +26,7 @@ import java.util.Optional;
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final MemberRepository memberRepository;
+    private final FileRepository fileRepository;
     @Override
     public List<ItemDto> itemListFn() {
     //기존의 findAll() 대신 N+1 문제를 방지하는 findAllWithMember()사용
@@ -49,26 +57,84 @@ public class ItemServiceImpl implements ItemService {
                 .itemDetail(itemEntity.getItemDetail())
                 .itemPrice(itemEntity.getItemPrice())
                 .itemSize(defaultSize)
+                .attachFile(itemEntity.getAttachFile())
+                .newFileName(itemEntity.getFileEntities().get(0).getNewFileName())
+                .oldFileName(itemEntity.getFileEntities().get(0).getOldFileName())
                 .memberId(itemEntity.getMemberEntity().getId())
                 .createTime(itemEntity.getCreateTime())
                 .updateTime(itemEntity.getUpdateTime())
                 .build();
     }
+//    파일 추가 전
+//    @Override
+//    public void itemInsert(ItemDto itemDto) {
+//        memberRepository.findById(itemDto.getMemberId()).orElseThrow(()->{
+//            throw new IllegalArgumentException("회원정보가 없습니다.");
+//        });
+//
+//        //파일(이미지 없을때)
+//        ItemEntity itemEntity = ItemEntity.builder()
+//                .itemTitle(itemDto.getItemTitle())
+//                .itemDetail(itemDto.getItemDetail())
+//                .itemPrice(itemDto.getItemPrice())
+//                .memberEntity(MemberEntity.builder().id(itemDto.getMemberId()).build())
+//                .build();
+//        itemRepository.save(itemEntity);
+//    }
 
+
+    //파일 추가
     @Override
-    public void itemInsert(ItemDto itemDto) {
+    public void itemInsert(ItemDto itemDto) throws IOException {
+        //1. 작성자 확인
         memberRepository.findById(itemDto.getMemberId()).orElseThrow(()->{
             throw new IllegalArgumentException("회원정보가 없습니다.");
         });
+        MemberEntity memberEntity= MemberEntity.builder()
+                .id(itemDto.getMemberId())
+                .build();
 
-        //파일(이미지 없을때)
-        ItemEntity itemEntity = ItemEntity.builder()
+        //2. 파일 없는 경우
+        if(itemDto.getItemFile().isEmpty()){
+            ItemEntity noFileItemEntity=ItemEntity.builder()
+                    .memberEntity(memberEntity)
+                    .attachFile(0)
+                    .itemPrice(itemDto.getItemPrice())
+                    .itemTitle(itemDto.getItemTitle())
+                    .itemDetail(itemDto.getItemDetail())
+                    .build();
+            itemRepository.save(noFileItemEntity);
+            return;
+        }
+        //3. 파일 있는 경우
+        MultipartFile itemFile = itemDto.getItemFile();
+        String oldFileName=itemFile.getOriginalFilename();
+        String newFileName= UUID.randomUUID()+"_"+oldFileName;
+        String fileSavePath="E:/full/upload/test0521/"+ newFileName;
+        //파일 저장
+        itemFile.transferTo(new File(fileSavePath));
+        //게시글 저장
+        ItemEntity withFileItemEntity=ItemEntity.builder()
+                .memberEntity(memberEntity)
+                .attachFile(1)
+                .itemPrice(itemDto.getItemPrice())
                 .itemTitle(itemDto.getItemTitle())
                 .itemDetail(itemDto.getItemDetail())
-                .itemPrice(itemDto.getItemPrice())
-                .memberEntity(MemberEntity.builder().id(itemDto.getMemberId()).build())
                 .build();
-        itemRepository.save(itemEntity);
+        ItemEntity saveItem=itemRepository.save(withFileItemEntity);
+        //파일 DB저장
+//        FileDto fileDto=FileDto.builder()
+//                .oldFileName(oldFileName)
+//                .newFileName(newFileName)
+//                .itemEntity(savItem)
+//                .build();
+        fileRepository.save(FileEntity.builder()
+                        .itemEntity(saveItem)
+                        .oldFileName(oldFileName)
+                        .newFileName(newFileName)
+                        .build());
     }
+
+
 }
 

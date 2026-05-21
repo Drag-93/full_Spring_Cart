@@ -17,7 +17,7 @@
                 <h1 class="title">상품등록 페이지</h1>
                 <div class="admin-addItem">
                     <div class="admin-addItem-con">
-                        <form th:action="@{/admin/item/write}" method="post">
+                        <form th:action="@{/admin/item/write}" method="post" enctype="multipart/form-data">
                             <ul>
                                 <li>
                                     <label for="itemTitle">상품명</label>
@@ -34,6 +34,10 @@
                                 <li>
                                     <label for="memberId">등록자 ID</label>
                                     <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}" readonly>
+                                </li>
+                                <li>
+                                    <label for="itemFile">파일등록</label>
+                                    <input type="file" name="itemFile" id="itemFile">
                                 </li>
                                 <li>
                                     <input type="submit" value="등록하기">
