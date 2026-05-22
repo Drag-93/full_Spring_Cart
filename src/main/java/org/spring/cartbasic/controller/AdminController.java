@@ -29,7 +29,7 @@ public class AdminController {
     private final ItemService itemService;
 
 
-    @GetMapping({"/","dashboard"})
+    @GetMapping({"","dashboard"})
     public String index(){
         return "admin/index";
     }

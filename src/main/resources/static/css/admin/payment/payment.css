@@ -1,0 +1,245 @@
+@import URL(../adminLeft.css);
+@import URL(../adminHeader.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.admin {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.admin-con {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* left fragment 제외한 오른쪽 영역 */
+.right {
+    flex: 1;
+    min-width: 0;
+    background-color: #f4f6f9;
+}
+
+/* 본문 */
+.admin-list {
+    padding: 30px;
+}
+
+.admin-list .title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* 결제 목록 박스 */
+.payment {
+    width: 100%;
+}
+
+.payment-con {
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+}
+
+/* 검색 영역 */
+.search {
+    margin-bottom: 20px;
+}
+
+.search form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search select,
+.search input[type="text"] {
+    height: 38px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 12px;
+    outline: none;
+}
+
+.search select {
+    min-width: 130px;
+}
+
+.search input[type="text"] {
+    width: 260px;
+}
+
+.search input[type="button"] {
+    height: 38px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #222;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search input[type="button"]:hover {
+    background-color: #444;
+}
+
+/* 테이블 */
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead {
+    background-color: #222;
+    color: #fff;
+}
+
+th,
+td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fb;
+}
+
+td:nth-child(4) {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td:nth-child(10) {
+    min-width: 260px;
+    white-space: normal;
+    text-align: left;
+}
+
+td:nth-child(10) span {
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+
+td button {
+    border: none;
+    border-radius: 7px;
+    padding: 7px 12px;
+    background-color: #2f6fed;
+    color: #fff;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #1f55bd;
+}
+
+tfoot td {
+    padding: 18px;
+    color: #777;
+    background-color: #fafafa;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-con {
+    width: 520px;
+    max-width: 90%;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.modal-con ul {
+    margin-top: 20px;
+}
+
+.modal-con li {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-con li > span:first-child {
+    width: 110px;
+    flex-shrink: 0;
+    font-weight: 700;
+    color: #555;
+}
+
+.modal-con li > span:last-child {
+    flex: 1;
+    text-align: right;
+    color: #222;
+    word-break: break-all;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+    .admin-list {
+        padding: 20px;
+    }
+
+    .search form {
+        flex-wrap: wrap;
+    }
+
+    .search input[type="text"] {
+        width: 100%;
+    }
+}

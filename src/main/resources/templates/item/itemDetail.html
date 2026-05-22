@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
@@ -11,62 +11,77 @@
 <div th:replace="~{fragments/common/header :: headerFragment}"></div>
 <div class="detail">
     <div class="detail-con">
-        <h1 th:text="${item.itemTitle}"></h1>
-        <form th:action="@{/cart/insert/addCart0}" method="post">
-            <ul>
-                <li>
-                    <label for="id">ID</label>
-                    <input type="text" name="id" id="id" th:value="${item.id}">
-                </li>
-                <li>
-                    <label for="itemTitle">itemTitle</label>
-                    <input type="text" name="itemTitle" id="itemTitle" th:value="${item.itemTitle}">
-                </li>
-                <li>
-                    <label for="itemDetail">itemDetail</label>
-                    <input type="text" name="itemDetail" id="itemDetail" th:value="${item.itemDetail}">
-                </li>
-                <li>
-                    <label for="itemPrice">itemPrice</label>
-                    <input type="text" name="itemPrice" id="itemPrice" th:value="${item.itemPrice}">
-                </li>
-                <th:block sec:authorize="isAuthenticated()">
-                    <li>
-                    <label for="memberId">memberId</label>
-                    <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}" readonly>
-                    </li>
+        <div class="detail-wrap">
+
+            <div class="detail-image">
+                <th:block th:if="${item.attachFile==1}">
+                    <img th:src="@{|/upload/${item.newFileName}|}" alt="상품이미지">
                 </th:block>
-                <th:block sec:authorize="isAnonymous()">
-                    <li>
-                    <input type="hidden" name="memberId"  th:value="1L" readonly>
-                    </li>
+
+                <th:block th:unless="${item.attachFile==1}">
+                    <img src="https://placehold.co/500x600?text=NO+IMAGE">
                 </th:block>
-                <li>
-                    <label for="itemSize">itemSize</label>
-                    <input type="number" name="itemSize" id="itemSize" th:value="${item.itemSize}">
-                </li>
-                <li>
-                    <span>total: </span>
-                    <span id="total"></span>
-                </li>
-                <li th:text="${item.createTime}"></li>
-                <li th:text="${item.updateTime}"></li>
-                <li>
-                    <!--로그인 상태 : 모든 장바구니 담기 기능 활성화-->
-                    <th:block sec:authorize="isAuthenticated()">
-                    <input type="submit" value="장바구니0">
-                    <button type="button" onclick="cartFn(event)">장바구니1(JS)</button>
-                    <a th:href="@{/cart/insert/memberId/{memberId}/id/{id}(memberId=${item.memberId},id=${item.id})}">장바구니2</a>
-                    </th:block>
-                    <!-- 비로그인 상태 시: 로그인 유도 문구 또는 로그인 페이지 이동 링크 제출-->
-                    <th:block sec:authorize="isAnonymous()">
-                    <div class="login-alert">
-                        장바구니 기능은 <a th:href="@{/member/login}">로그인</a> 후 이용 가능합니다.
-                    </div>
-                    </th:block>
-                </li>
-            </ul>
-        </form>
+            </div>
+            <div class="detail-info">
+                <h1 th:text="${item.itemTitle}"></h1>
+                <form th:action="@{/cart/insert/addCart0}" method="post">
+                    <ul>
+                        <li>
+                            <label for="id">ID</label>
+                            <input type="text" name="id" id="id" th:value="${item.id}">
+                        </li>
+                        <li>
+                            <label for="itemTitle">itemTitle</label>
+                            <input type="text" name="itemTitle" id="itemTitle" th:value="${item.itemTitle}">
+                        </li>
+                        <li>
+                            <label for="itemDetail">itemDetail</label>
+                            <input type="text" name="itemDetail" id="itemDetail" th:value="${item.itemDetail}">
+                        </li>
+                        <li>
+                            <label for="itemPrice">itemPrice</label>
+                            <input type="text" name="itemPrice" id="itemPrice" th:value="${item.itemPrice}">
+                        </li>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <li>
+                                <label for="memberId">memberId</label>
+                                <input type="text" name="memberId" id="memberId"
+                                       th:value="${#authentication.principal.memberEntity.id}" readonly>
+                            </li>
+                        </th:block>
+                        <th:block sec:authorize="isAnonymous()">
+                            <li>
+                                <input type="hidden" name="memberId" th:value="1L" readonly>
+                            </li>
+                        </th:block>
+                        <li>
+                            <label for="itemSize">itemSize</label>
+                            <input type="number" name="itemSize" id="itemSize" th:value="${item.itemSize}">
+                        </li>
+                        <li>
+                            <span>total: </span>
+                            <span id="total"></span>
+                        </li>
+                        <li th:text="${item.createTime}"></li>
+                        <li th:text="${item.updateTime}"></li>
+                        <li>
+                            <!--로그인 상태 : 모든 장바구니 담기 기능 활성화-->
+                            <th:block sec:authorize="isAuthenticated()">
+                                <input type="submit" value="장바구니0">
+                                <button type="button" onclick="cartFn(event)">장바구니1(JS)</button>
+                                <a th:href="@{/cart/insert/memberId/{memberId}/id/{id}(memberId=${item.memberId},id=${item.id})}">장바구니2</a>
+                            </th:block>
+                            <!-- 비로그인 상태 시: 로그인 유도 문구 또는 로그인 페이지 이동 링크 제출-->
+                            <th:block sec:authorize="isAnonymous()">
+                                <div class="login-alert">
+                                    장바구니 기능은 <a th:href="@{/member/login}">로그인</a> 후 이용 가능합니다.
+                                </div>
+                            </th:block>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -1,18 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>admin</title>
+    <title>결제목록(관리자)</title>
+    <script th:src="@{/js/adminPayment.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/admin/payment/payment.css}">
 </head>
 <body>
 <div class="admin">
     <div class="admin-con">
-        <div th:replace="~{fragments/admin/adminLeft::leftFragment}"></div>
-        <div class="admin-main">
-            <div th:replace="~{fragments/admin/adminHeader::adminHeaderFragment}"></div>
+        <div th:replace="~{fragments/admin/adminLeft :: leftFragment}"></div>
         <div class="right">
-            <div class="title">Payment</div>
-        </div>
+            <div th:replace="~{fragments/admin/adminHeader :: adminHeaderFragment}"></div>
+            <div class="admin-list">
+                <div class="title">PAYMENT</div>
+                <div class="payment">
+                    <div class="payment-con">
+                        <div class="search">
+                            <form th:action="@{/admin/payment/search}" method="get">
+                                <select name="subject" id="subject">
+                                    <option value="paymentType" selected>결제방식</option>
+                                    <option value="orderPost">주문처</option>
+                                    <option value="orderAddr">배송주소</option>
+                                    <option value="payResult">payResult</option>
+                                    <option value="orderMethod">orderMethod</option>
+                                    <option value="memberId">memberId</option>
+                                </select>
+                                <input type="text" name="search" id="search"/>
+                                <!-- <input type="submit" value="검색" /> -->
+                                <input type="button" value="검색" onclick="searchFn(event)"  />
+                            </form>
+                        </div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>paymentType</th>
+                                <th>orderPost</th>
+                                <th>orderAddr</th>
+                                <th>memberId</th>
+                                <th>payResult</th>
+                                <th>orderMethod</th>
+                                <th>createTime</th>
+                                <th>updateTime</th>
+                                <th>paymentItemEntities</th>
+                                <th>보기</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="payment: ${paymentList}">
+                                <tr>
+                                    <td th:text="${payment.id}"></td>
+                                    <td th:text="${payment.paymentType}"></td>
+                                    <td th:text="${payment.orderPost}"></td>
+                                    <td th:text="${payment.orderAddr}"></td>
+                                    <td th:text="${payment.memberId}"></td>
+                                    <td th:text="${payment.payResult}"></td>
+                                    <td th:text="${payment.orderMethod}"></td>
+                                    <!--                                    <td th:text="${payment.createTime}"></td>-->
+                                    <!--                                    <td th:text="${payment.updateTime}"></td>-->
+                                    <td th:text="${#temporals.format(payment.createTime, 'yyyy-MM-dd HH-mm-ss')}"></td>
+                                    <td th:text="${#temporals.format(payment.updateTime, 'yyyy-MM-dd HH-mm-ss')}"></td>
+                                    <td>
+                                        <th:block th:each="item: ${payment.paymentItemEntities}">
+                                            <span th:text="${item.id}"></span>
+                                            <span th:text="${item.paymentItemTitle}"></span>
+                                            <span th:text="${item.paymentItemPrice}"></span>
+                                            <span th:text="${item.paymentItemSize}"></span>
+                                        </th:block>
+
+                                    </td>
+                                    <td>
+                                        <!-- <a th:href="@{/api/admin/member/detail/{id}(id=${member.id})}">보기 </a> -->
+                                        <button th:onclick="paymentDetailFn(event,[[${payment.id}]])">보기</button>
+
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="11">Paging</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal">
+                    <div class="modal-con">
+                        <span class="close" onclick="closeFn()">X</span>
+                        <ul>
+                            <li><span>ID</span><span class="id"></span></li>
+                            <li><span>회원아이디</span><span class="memberId"></span></li>
+                            <li><span>결제방법</span><span class="paymentType"></span></li>
+                            <li><span>주문처</span><span class="orderPost"></span></li>
+                            <li><span>배송주소</span><span class="orderAddr"></span></li>
+                            <li><span>결제금액</span><span class="payResult"></span></li>
+                            <li><span>배송방법</span><span class="orderMethod"></span></li>
+                            <li> <span>결제시간</span><span class="createTime"></span></li>
+                            <li> <span>결제상품</span><span class="paymentItemEntities"></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <script>
+
+                </script>
+            </div>
         </div>
     </div>
 </div>

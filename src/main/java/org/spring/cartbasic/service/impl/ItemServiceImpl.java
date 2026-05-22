@@ -31,13 +31,26 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> itemListFn() {
     //기존의 findAll() 대신 N+1 문제를 방지하는 findAllWithMember()사용
         return itemRepository.findAllWithMember().stream()
-                .map(item -> ItemDto.builder()
-                        .id(item.getId())
-                        .itemTitle(item.getItemTitle())
-                        .itemDetail(item.getItemDetail())
-                        .itemPrice(item.getItemPrice())
-                        .memberId(item.getMemberEntity().getId()) // 이제 추가 쿼리가 발생하지 않음
-                        .build())
+                .map(item -> {
+                    String newFileName = null;
+                    String oldFileName = null;
+
+                    if (item.getFileEntities() != null && !item.getFileEntities().isEmpty()) {
+                        newFileName = item.getFileEntities().get(0).getNewFileName();
+                        oldFileName = item.getFileEntities().get(0).getOldFileName();
+                    }
+
+                    return ItemDto.builder()
+                            .id(item.getId())
+                            .itemTitle(item.getItemTitle())
+                            .itemDetail(item.getItemDetail())
+                            .itemPrice(item.getItemPrice())
+                            .attachFile(item.getAttachFile())
+                            .newFileName(newFileName)
+                            .oldFileName(oldFileName)
+                            .memberId(item.getMemberEntity().getId())
+                            .build();
+                })
                 .toList();
     }
 
